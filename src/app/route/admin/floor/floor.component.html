@@ -1,0 +1,23 @@
+<mat-card class="fullCard">
+  <mat-card-header>
+    <mat-card-title>Floors</mat-card-title>
+    <mat-card-subtitle>{{currentBuilding.name}}</mat-card-subtitle>
+    <mat-card style="margin-left: auto;">
+      <button style="margin-left: auto; margin-right: 5px;" mat-mini-fab color="accent" matTooltip="Reset Floors" (click)="openResetDialog()">
+        <mat-icon>restart_alt</mat-icon>
+      </button>
+      <button style="margin-left: auto; margin-right: 5px;" mat-mini-fab color="accent" matTooltip="Edit Floors" (click)="openResetDialog()">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button style="margin-left: auto; margin-right: 15px;" mat-mini-fab color="warn" matTooltip="Remove Floors" (click)="openRemoveFloorsDialog()">
+        <mat-icon>delete_outline</mat-icon>
+      </button>
+      <button style="margin-left: auto;" mat-fab color="primary" matTooltip="Create new Floor" (click)="openDialog()">
+        <mat-icon>add_circle</mat-icon>
+      </button>
+    </mat-card>
+  </mat-card-header>
+  <mat-card-content>
+    <app-table-floor></app-table-floor>
+  </mat-card-content>
+</mat-card>

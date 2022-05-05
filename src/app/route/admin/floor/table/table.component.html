@@ -1,0 +1,63 @@
+<mat-form-field>
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <!-- Floor Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> NAME </th>
+      <td mat-cell *matCellDef="let floor"> {{floor.name}} </td>
+    </ng-container>
+
+    <!-- Type Column -->
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> TYPE </th>
+
+      <td mat-cell *matCellDef="let floor">
+        <div *ngIf="floor.type === 1">COMMON</div>
+        <div *ngIf="floor.type === 2">RESIDENCIAL</div>
+        <div *ngIf="floor.type === 3">MIX</div>
+      </td>
+    </ng-container>
+
+    <!-- Description Column -->
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> DESCRIPTION   </th>
+      <td mat-cell *matCellDef="let floor"> {{floor.description}} </td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ACTIONS </th>
+      <td mat-cell *matCellDef="let floor">
+        <div class="button-row">
+          <div class="flex-container">
+            <div class="button-container">
+              <button mat-mini-fab color="primary" matTooltip="Edit Floor" (click)="openDialog(floor)">
+                <mat-icon>edit</mat-icon>
+              </button>
+            </div>
+            <div class="button-container">
+              <button mat-mini-fab color="warn" matTooltip="Delete Floor" (click)="openDeleteDialog(floor)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </td>
+    </ng-container>
+
+   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let floor; columns: displayedColumns;"></tr>
+
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+    </tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>

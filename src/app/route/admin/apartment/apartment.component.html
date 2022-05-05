@@ -1,0 +1,12 @@
+<mat-card class="fullCard">
+  <mat-card-header>
+    <mat-card-title>Apartments </mat-card-title>
+    <mat-card-subtitle>{{currentBuilding.name}}</mat-card-subtitle>
+    <button style="margin-left: auto;" mat-fab color="primary" matTooltip="Create new Apartment" (click)="openDialog()">
+      <mat-icon>add_circle</mat-icon>
+    </button>
+  </mat-card-header>
+  <mat-card-content>
+    <app-table-apartment></app-table-apartment>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,113 @@
+<mat-form-field>
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> NAME </th>
+      <td mat-cell *matCellDef="let user"> {{user.firstname}} {{user.lastname}} </td>
+    </ng-container>
+
+    <!-- Email Column -->
+    <ng-container matColumnDef="username">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> USERNAME </th>
+      <td mat-cell *matCellDef="let user"> {{user.username}} </td>
+    </ng-container>
+
+    <!-- Email Column -->
+    <ng-container matColumnDef="role">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ROLE </th>
+      <td mat-cell *matCellDef="let user"> {{user.role && user.role.name ? user.role.name : 'No Role'}} </td>
+    </ng-container>
+
+    <!-- Phone Column -->
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> PHONE </th>
+      <td mat-cell *matCellDef="let user" > {{user.phoneNumber}} </td>
+    </ng-container>
+
+    <!-- Default Building Column -->
+    <ng-container matColumnDef="defaultBuilding">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> DEFAULT BUILDING </th>
+      <td mat-cell *matCellDef="let user" > {{findBuilding(user.defaultBuilding)}} </td>
+    </ng-container>
+
+    <!-- Buildings Column -->
+    <ng-container matColumnDef="buildings">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>BUILDINGS</th>
+      <td mat-cell *matCellDef="let user" >
+        <button mat-icon-button
+                [satPopoverAnchor]="p"
+                (click)="popoverOpen(user, p)"
+                matTooltip="Add or Remove Buildings">
+          <mat-icon >location_city</mat-icon>
+        </button>
+
+        <sat-popover  #p
+                      horizontalAlign="after"
+                      verticalAlign="center">
+          <mat-card >
+            <mat-list >
+              <mat-list-item *ngFor="let building of buildings">
+                <mat-checkbox (change)="buildingChange($event, user, building)"
+                              [disabled]="isDefault(user, building)"
+                              [checked]="isBuildingChecked(user, building)">{{building.name}}</mat-checkbox>
+              </mat-list-item>
+             </mat-list>
+          </mat-card>
+        </sat-popover>
+      </td>
+    </ng-container>
+
+
+    <!-- Status Column -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> STATUS </th>
+      <td mat-cell *matCellDef="let user" >
+        <button mat-icon-button [color]="user.enabled ? 'primary' : 'warn'" (click)="changeEnable(user)" >
+          <mat-icon  *ngIf="user.enabled" matTooltip="Disable User">check_circle</mat-icon>
+          <mat-icon  *ngIf="!user.enabled" matTooltip="Enable User">cancel</mat-icon>
+        </button>
+
+      </td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th class="actionHeader" mat-header-cell *matHeaderCellDef mat-sort-header> ACTIONS </th>
+      <td class="actionBody" mat-cell *matCellDef="let user">
+        <div class="button-row">
+          <div class="flex-container">
+            <div class="button-container">
+              <button mat-mini-fab color="primary" matTooltip="Edit User" (click)="openDialog(user)">
+                <mat-icon>edit</mat-icon>
+              </button>
+            </div>
+
+            <div *ngIf="user.id !== loggedUser.id" class="button-container">
+              <button mat-mini-fab color="warn"
+                      matTooltip="Delete User"
+                      (click)="openDeleteDialog(user)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let user; columns: displayedColumns;"></tr>
+
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+    </tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>

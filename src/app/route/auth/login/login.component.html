@@ -1,0 +1,35 @@
+<mat-card class="card">
+  <mat-card-header class="center-card-elements">
+    <mat-card-title>Sign In</mat-card-title>
+    <mat-card-subtitle>Welcome to Aria Building</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content class="center">
+    <form [formGroup]="options">
+
+      <mat-form-field appearance="legacy" >
+        <mat-label>Username</mat-label>
+        <input [(ngModel)]="user.username" matInput type="text" placeholder="username@example.com" [formControl]="usernameControl" required>
+        <mat-error *ngIf="usernameControl.hasError('email') && !usernameControl.hasError('required')">Please enter a valid email address</mat-error>
+        <mat-error *ngIf="usernameControl.hasError('required')">Plase enter an email</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="legacy">
+        <mat-label>Password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="user.password" placeholder="Password" [formControl]="passwordControl" required>
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error *ngIf="passwordControl.invalid">Please enter your password</mat-error>
+      </mat-form-field>
+
+    </form>
+  </mat-card-content>
+  <mat-card-actions class="center-card-elements">
+    <button mat-raised-button color="primary" (click)="login()">Log In</button>
+  </mat-card-actions>
+  <mat-divider></mat-divider>
+  <mat-card-actions class="center-card-elements">
+    <mat-card-subtitle>Forgot Password?</mat-card-subtitle>
+  </mat-card-actions>
+</mat-card>
+

@@ -1,0 +1,29 @@
+<button mat-button [matMenuTriggerFor]="menu">Welcome, {{loggedUser.firstname}} {{loggedUser.lastname}}</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>person</mat-icon>
+        <span>View Profile</span>
+      </button>
+      <button mat-menu-item (click)="openChangePasswordDialog()">
+        <mat-icon>password</mat-icon>
+        <span>Change Password</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>settings</mat-icon>
+        <span>Settings and Privacy</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item>
+        <mat-icon>announcement</mat-icon>
+        <span>Help us to improve the system</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>help</mat-icon>
+        <span>Help and Support</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Log Out</span>
+      </button>
+    </mat-menu>
