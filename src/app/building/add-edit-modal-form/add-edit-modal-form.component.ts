@@ -16,19 +16,18 @@ export class AddEditModalFormComponent implements OnInit {
 
   ngOnInit() {
     this.buildingForm = this.fb.group({
-      title: ['', Validators.required],
+      name: ['', Validators.required],
       description: [''],
     });
   }
 
   closeModal() {
-    this.modalController.dismiss({
-      'dismissed': true
-    });
+    this.modalController.dismiss(null);
   }
 
   submitForm() {
     console.log(this.buildingForm.value)
+    this.modalController.dismiss(this.buildingForm.value);
   }
 
 }

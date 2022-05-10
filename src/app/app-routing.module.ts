@@ -1,5 +1,8 @@
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { RequestInterceptor } from './auth/request-interceptor.service';
+import { ResponseInterceptor } from './auth/response-interceptor.service';
 
 const routes: Routes = [
   {
@@ -17,6 +20,9 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor,  multi: true }
+  ]
 })
 export class AppRoutingModule { }

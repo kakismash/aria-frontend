@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { Building } from 'src/app/model/building.model';
 import { AddEditModalFormComponent } from '../add-edit-modal-form/add-edit-modal-form.component';
+import { BuildingService } from '../building.service';
 
 @Component({
   selector: 'app-list',
@@ -9,9 +11,21 @@ import { AddEditModalFormComponent } from '../add-edit-modal-form/add-edit-modal
 })
 export class ListComponent implements OnInit {
 
-  constructor(public modalController: ModalController) { }
+  buildings: Array<Building> = new Array<Building>();
 
-  ngOnInit() {}
+  constructor(public modalController:  ModalController,
+              private buildingService: BuildingService) { }
+
+  ngOnInit() {
+    this.list();
+  }
+
+  list() {
+    this.buildingService.list()
+      .subscribe(buildings => {
+        console.log(buildings)
+      })
+  }
 
   async openModal() {
     const modal = await this.modalController.create({
@@ -20,13 +34,19 @@ export class ListComponent implements OnInit {
         'model_title': "Nomadic model's reveberation"
       }
     });
-    // modal.onDidDismiss().then((modelData) => {
-    //   if (modelData !== null) {
-    //     this.modelData = modelData.data;
-    //     console.log('Modal Data : ' + modelData.data);
-    //   }
-    // });
+
+    modal.onDidDismiss()
+      .then((response) => {
+        const {data} = response;
+
+        if (data) {
+
+        }
+    });
+
     return await modal.present();
+    
   }
+
 
 }
