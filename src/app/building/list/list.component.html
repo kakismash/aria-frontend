@@ -1,7 +1,11 @@
 <ion-content fullscreen>
   <ion-list>
     <ion-list-header> Recent Conversations </ion-list-header>
-
+    <ion-fab horizontal="end" vertical="top" slot="fixed">
+      <ion-fab-button color="danger" (click)="openModal()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
     <ion-item>
       <ion-avatar slot="start">
         <img src="./avatar-han.png" />
@@ -13,7 +17,7 @@
       </ion-label>
       <div>
         <ion-fab horizontal="end" vertical="bottom" slot="fixed">
-          <ion-fab-button color="light">
+          <ion-fab-button color="light" class="button-size">
             <ion-icon md="caret-back" ios="chevron-back-circle-outline"></ion-icon>
           </ion-fab-button>
           <ion-fab-list side="start">
