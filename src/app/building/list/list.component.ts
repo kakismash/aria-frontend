@@ -27,11 +27,16 @@ export class ListComponent implements OnInit {
       })
   }
 
-  async openModal() {
+  async openModal(building?: Building) {
+    let formType = 0;
+    if (building) {
+      formType = 1;
+    }
     const modal = await this.modalController.create({
       component: AddEditModalFormComponent,
       componentProps: {
-        'model_title': "Nomadic model's reveberation"
+        building: building,
+        formType: formType
       }
     });
 

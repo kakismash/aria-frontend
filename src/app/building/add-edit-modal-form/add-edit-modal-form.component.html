@@ -1,6 +1,6 @@
 <ion-header translucent>
   <ion-toolbar>
-    <ion-title>Add Building</ion-title>
+    <ion-title>{{formType === 0 ? 'Add Building' : 'Edit Building'}}</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="closeModal()">X</ion-button>
     </ion-buttons>

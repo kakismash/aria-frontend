@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
+import { Building } from 'src/app/model/building.model';
 
 @Component({
   selector: 'app-add-edit-modal-form',
@@ -9,6 +10,9 @@ import { ModalController } from '@ionic/angular';
 })
 export class AddEditModalFormComponent implements OnInit {
 
+  @Input() building: Building;
+  @Input() formType: number;
+
   buildingForm: FormGroup;
 
   constructor(private modalController: ModalController,
@@ -16,9 +20,10 @@ export class AddEditModalFormComponent implements OnInit {
 
   ngOnInit() {
     this.buildingForm = this.fb.group({
-      name: ['', Validators.required],
-      description: [''],
+      name: [this.building.name, Validators.required],
+      description: [this.building.description],
     });
+
   }
 
   closeModal() {
@@ -26,7 +31,15 @@ export class AddEditModalFormComponent implements OnInit {
   }
 
   submitForm() {
-    this.modalController.dismiss(this.buildingForm.value);
+    const formData = this.buildingForm.value;
+    if (this.formType === 0) {
+      this.modalController.dismiss(formData);
+    } else {
+      this.building.name        = formData.name;
+      this.building.description = formData.description;
+      this.modalController.dismiss(this.building);
+    }
+    
   }
 
 }
