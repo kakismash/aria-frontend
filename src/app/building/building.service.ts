@@ -16,4 +16,12 @@ export class BuildingService {
   list(): Observable <Array<Building>> {
     return this.httpC.get<Array<Building>>(this.path);
   }
+
+  createOrUpdate(building: Building): Observable<Building> {
+    return this.httpC.post<Building>(this.path, building);
+  }
+
+  delete(id: number): Observable<Building> {
+    return this.httpC.delete<Building>(this.path + '/' + id);
+  }
 }

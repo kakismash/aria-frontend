@@ -26,7 +26,6 @@ export class AddEditModalFormComponent implements OnInit {
   }
 
   submitForm() {
-    console.log(this.buildingForm.value)
     this.modalController.dismiss(this.buildingForm.value);
   }
 

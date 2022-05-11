@@ -23,7 +23,7 @@ export class ListComponent implements OnInit {
   list() {
     this.buildingService.list()
       .subscribe(buildings => {
-        console.log(buildings)
+        this.buildings = buildings;
       })
   }
 
@@ -36,16 +36,28 @@ export class ListComponent implements OnInit {
     });
 
     modal.onDidDismiss()
-      .then((response) => {
+      .then(response => {
         const {data} = response;
 
         if (data) {
-
+          this.buildingService.createOrUpdate(data)
+            .subscribe(buildingResponse => {
+              if (buildingResponse) {
+                this.list();
+              }
+            })
         }
     });
 
     return await modal.present();
     
+  }
+
+  delete(id: number) {
+    this.buildingService.delete(id)
+      .subscribe(response => {
+        this.list();
+      })
   }
 
 
