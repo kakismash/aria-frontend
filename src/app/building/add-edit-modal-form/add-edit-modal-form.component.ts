@@ -21,7 +21,7 @@ export class AddEditModalFormComponent implements OnInit {
   ngOnInit() {
     this.buildingForm = this.fb.group({
       name: [this.building.name, Validators.required],
-      address: [this.building.name, Validators.required],
+      address: [this.building.address, Validators.required],
       description: [this.building.description],
     });
 

@@ -28,9 +28,10 @@ export class ListComponent implements OnInit {
   }
 
   async openModal(building?: Building) {
-    let formType = 0;
-    if (building) {
-      formType = 1;
+    let formType = 1;
+    if (!building) {
+      formType = 0;
+      building = new Building();
     }
     const modal = await this.modalController.create({
       component: AddEditModalFormComponent,
