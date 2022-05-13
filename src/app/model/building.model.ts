@@ -6,6 +6,7 @@ export class Building {
 
     id:          number;
     name:        string;
+    address:     string;
     description: string;
     apartments:  Array<Apartment> = new Array<Apartment>();
     users:       Array<User>      = new Array<User>();

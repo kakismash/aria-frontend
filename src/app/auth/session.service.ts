@@ -8,6 +8,6 @@ export class SessionService {
   constructor() { }
 
   getToken() {
-    return 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbGZpYW4xOTkxQGdtYWlsLmNvbSIsImlhdCI6MTY1MjIyMzc2OSwiZXhwIjoxNjUyMjU5NzY5fQ.TrnKkANnUUgiMygiyOHvPEHH5ARyMWb1AuaVTTQYWHqnA0lt2O8ezBoFOyUxHOUwSm6vGgvP_wShgDy6cOa8UA'
+    return 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbGZpYW4xOTkxQGdtYWlsLmNvbSIsImlhdCI6MTY1MjQwMDk1NCwiZXhwIjoxNjUyNDM2OTU0fQ.UUZEO2Yn7-eAtBGPatkfaET1EiJBC9YOghYfOkvo270BWqpWIsqdMuVmwRRnIKWFBRrtrxtL7J_pZ9upqX8TPg';
   }
 }

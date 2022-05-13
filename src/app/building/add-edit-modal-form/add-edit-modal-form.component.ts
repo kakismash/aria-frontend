@@ -21,6 +21,7 @@ export class AddEditModalFormComponent implements OnInit {
   ngOnInit() {
     this.buildingForm = this.fb.group({
       name: [this.building.name, Validators.required],
+      address: [this.building.name, Validators.required],
       description: [this.building.description],
     });
 
@@ -37,6 +38,7 @@ export class AddEditModalFormComponent implements OnInit {
     } else {
       this.building.name        = formData.name;
       this.building.description = formData.description;
+      this.building.address     = formData.address;
       this.modalController.dismiss(this.building);
     }
     

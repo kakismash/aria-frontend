@@ -10,6 +10,8 @@
   <form [formGroup]="buildingForm" (ngSubmit)="submitForm()">
     <label>Name</label>
     <input formControlName="name">
+    <label>Address</label>
+    <input formControlName="address">
     <label>Description</label>
     <textarea formControlName="description"></textarea>
     <button type="submit">Save</button>
